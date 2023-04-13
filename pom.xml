@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.alexmiranda</groupId>
-  <artifactId>hackerearth-codexplained-solutions</artifactId>
+  <artifactId>hackerearth-solutions</artifactId>
   <version>0.1.0-dev</version>
 
-  <name>hackerearth-codexplained-solutions</name>
-  <url>https://github.com/alexmiranda/hackerearth-codexplained-solutions</url>
+  <name>hackerearth-solutions</name>
+  <url>https://github.com/alexmiranda/hackerearth-solutions</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
