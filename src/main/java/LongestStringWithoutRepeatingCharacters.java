@@ -1,43 +1,31 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.PriorityQueue;
+import java.util.*;
 
 // https://www.hackerearth.com/problem/algorithm/longest-string-without-repeating-characters-fa0f5ffb/
 public class LongestStringWithoutRepeatingCharacters {
   public static void main(String[] args) throws IOException {
     try (var br = new BufferedReader(new InputStreamReader(System.in))) {
       String input = br.readLine();
-      var queue = new PriorityQueue<String>((a, b) -> b.length() - a.length());
-      queue.add(input);
+      int start = 0, max = 0;
+      int cap = (int) Math.ceil(Math.min(26 * 2, input.length()) / .75f);
+      var map = new HashMap<Character, Integer>(cap, .75f);
 
-      // bfs for the longest string without repeating chars
-      while (!queue.isEmpty()) {
-        String curr = queue.poll();
-        if (!hasDup(curr)) {
-          System.out.println(curr.length());
-          return;
+      for (int i = 0; i < input.length(); i++) {
+        char c = input.charAt(i);
+        int lastPos = map.getOrDefault(c, -1);
+        if (lastPos >= start) {
+          start = lastPos + 1;
         }
-
-        if (curr.length() > 1) {
-          queue.add(curr.substring(1));
-          queue.add(curr.substring(0, curr.length() - 1));
+        map.put(c, i);
+        int len = i - start + 1;
+        if (len > max) {
+          max = len;
         }
       }
 
-      // if we couldn't find any non-repeating characters in the whole string, then we return 1
-      System.out.println(1);
+      System.out.println(max);
     }
-  }
-
-  private static boolean hasDup(String str) {
-    var seen = new HashSet<Character>(str.length(), 1f);
-    for (int i = 0; i < str.length(); i++) {
-      if (!seen.add(str.charAt(i))) {
-        return true;
-      }
-    }
-    return false;
   }
 }
